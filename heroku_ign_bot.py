@@ -1,6 +1,6 @@
 from os import environ
 
-FILE_ID = environ['file_id']
+FILE_ID = environ['FILE_ID']
 
 def main():
     print(FILE_ID)
