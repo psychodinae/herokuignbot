@@ -1,12 +1,12 @@
 from os import environ
 
-FILE_ID = environ['FILE_ID']
+FORUM_COOKIE = environ['FORUM_COOKIE']
+
 
 def main():
-    print(FILE_ID)
-    return FILE_ID
+    print(FORUM_COOKIE)
+    return FORUM_COOKIE
 
 
 if __name__ == '__main__':
     main()
-    
