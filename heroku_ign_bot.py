@@ -57,7 +57,7 @@ class Bot2:
             ultimo_respondido = self.ultimo_respondido_cache()
             if int(post_id) > ultimo_respondido:
                 print(f'Reagi ao post!: {post_id}')
-                # self.ign.react('1', str(int_post_id))
+                self.ign.react('1', str(int_post_id))
                 save_cache_file(self.cache_file, post_id)
 
 
