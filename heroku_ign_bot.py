@@ -5,29 +5,25 @@ from time import sleep
 import lxml.html as parser
 from igninterage import Igninterage
 
+from gistman import GistMan
+
 FORUM_COOKIE = environ['FORUM_COOKIE']
+GIST_TOKEN = environ['GIST_TOKEN']
+FILE_ID = environ['FILE_ID']
 
 """
-    ### Ign Bot2 Demo by Psychodynae - 24/07/2020 ###
+    ### Ign HerokuBot by Psychodynae - 18/02/2021 ###
     Bot que reage com um joinha ao ser mencionado
+    heroku deploy!!!
 """
 
 
-def save_cache_file(f_name, content):
-    with open(f_name, 'w') as f:
-        f.write(content)
-
-
-def load_cache_file(f_name):
-    with open(f_name) as f:
-        return f.read()
-
-
-class Bot2:
-    def __init__(self, cache_file, tempo_de_loop=60):
+class HerokuBot:
+    def __init__(self, tempo_de_loop=60, tempo_entre_posts=10):
+        self.tempo_entre_posts = tempo_entre_posts
         self.ign = Igninterage('https://www.ignboards.com/')
+        self.gist = GistMan(GIST_TOKEN)
         self.ign.set_cookie(json.loads(FORUM_COOKIE))
-        self.cache_file = cache_file
         while True:
             print('rodando...')
             self.reage_no_post_de_quem_te_mencionou()
@@ -44,22 +40,17 @@ class Bot2:
                 mention_uris.append(alert.xpath('a/@href')[1])
         return mention_uris
 
-    def ultimo_respondido_cache(self):
-        try:
-            return int(load_cache_file(self.cache_file))
-        except FileNotFoundError:
-            return exit(1)
-
     def reage_no_post_de_quem_te_mencionou(self):
         mention_list = self.procura_mention()
         for item in reversed(mention_list):
             post_id = item.split('/')[2]
-            ultimo_respondido = self.ultimo_respondido_cache()
-            if int(post_id) > ultimo_respondido:
+            ultimo_respondido = self.gist.read_gist(FILE_ID)['files']['conf.data']['content']
+            if int(post_id) > int(ultimo_respondido):
                 print(f'Reagi ao post!: {post_id}')
                 self.ign.react('1', post_id)
-                save_cache_file(self.cache_file, post_id)
+                self.gist.update_gist(FILE_ID, 'conf.data', post_id)
+                sleep(self.tempo_entre_posts)
 
 
 if __name__ == '__main__':
-    Bot2('mention.data', tempo_de_loop=30)
+    HerokuBot(tempo_de_loop=30)
