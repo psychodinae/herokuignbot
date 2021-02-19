@@ -29,6 +29,7 @@ class Bot2:
         self.ign.set_cookie(json.loads(FORUM_COOKIE))
         self.cache_file = cache_file
         while True:
+            print('rodando...')
             self.reage_no_post_de_quem_te_mencionou()
             sleep(tempo_de_loop)
 
