@@ -62,4 +62,4 @@ class Bot2:
 
 
 if __name__ == '__main__':
-    Bot2('mention.data', tempo_de_loop=20)
+    Bot2('mention.data', tempo_de_loop=30)
