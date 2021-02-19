@@ -20,7 +20,8 @@ from gistman import GistMan
        
     3. Mude o valor da variavel TOKEN abaixo com o valor do token gerado e rode a funcao 
        cria_arquivo_de_configuracao()
-       OBS: Rode essa funcão apenas localmente nao esqueça que seu token do gist esta aqui.
+       OBS: Não commita esse arquivo em um git publico, rode-o apenas localmentenao esqueça que seu token
+       do gist esta aqui.
        
        
     4. No heroku vá em settings e em "Config vars" e adcione tres novas configs:
