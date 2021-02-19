@@ -8,7 +8,7 @@ from gistman import GistMan
           Configurando  COMECE AQUI!
 
 
-    1. Primeiro faça login na sua conta usando o navegador firefox no seu PC (no momento a lib
+    1. Primeiro faça login na sua conta do forum usando o navegador firefox no seu PC (no momento a lib
        igninterage só roda no windows), depois rode a função printa_seus_cookies_de_login() localmente
        para obter os cookies na forma de um json.
        não esqueca de instalar o modulo igninterage: pip install igninterage.
